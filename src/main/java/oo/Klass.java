@@ -2,13 +2,12 @@ package oo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Klass {
     private Integer number;
     private Optional<Student> leader = Optional.empty();
-    private final List<Person> attachedPeople = new ArrayList<>();
+    private final List<Person> observers = new ArrayList<>();
 
     public Klass(Integer number) {
         this.number = number;
@@ -16,6 +15,10 @@ public class Klass {
 
     public Integer getNumber() {
         return number;
+    }
+
+    public Optional<Student> getLeader() {
+        return leader;
     }
 
     @Override
@@ -32,8 +35,12 @@ public class Klass {
             System.out.println("It is not one of us.");
         }
         leader = Optional.of(student);
-        attachedPeople.forEach(person -> {
-            person.getRole().ifPresent(role -> System.out.printf("I am %s, %s of Class %d. I know %s become Leader.", person.getName(), role, this.getNumber(), student.getName()));
+        notifyObservers();
+    }
+
+    public void notifyObservers() {
+        observers.forEach(person -> {
+            person.update(this);
         });
     }
 
@@ -42,9 +49,9 @@ public class Klass {
     }
 
     public void attach(Person person) {
-        if (this.attachedPeople.contains(person)) {
+        if (this.observers.contains(person)) {
             return;
         }
-        this.attachedPeople.add(person);
+        this.observers.add(person);
     }
 }

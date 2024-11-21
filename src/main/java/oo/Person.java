@@ -46,4 +46,11 @@ public class Person {
     public Optional<String> getRole() {
         return role;
     }
+
+    public void update(Klass klass) {
+        if (this.getRole().isEmpty()) {
+            return;
+        }
+        klass.getLeader().ifPresent(leader -> System.out.printf("I am %s, %s of Class %d. I know %s become Leader.", this.getName(), this.getRole().get(), klass.getNumber(), leader.getName()));
+    }
 }
