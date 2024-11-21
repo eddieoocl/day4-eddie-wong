@@ -38,4 +38,12 @@ public class Person {
         Person person = (Person) obj;
         return this.id.equals(person.id);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Optional<String> getRole() {
+        return role;
+    }
 }
