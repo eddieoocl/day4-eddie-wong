@@ -16,6 +16,9 @@ public class Student extends Person {
         if (this.klass.isEmpty()) {
             return introduction;
         }
+        if (this.klass.get().isLeader(this)) {
+            return String.format("%s I am the leader of class %d.", introduction, klass.get().getNumber());
+        }
         return String.format("%s I am in class %d.", introduction, klass.get().getNumber());
     }
 
